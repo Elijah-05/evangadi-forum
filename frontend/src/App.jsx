@@ -45,7 +45,12 @@ const App = () => {
     {
       path: "/",
       element: <Layout />,
-      children: [],
+      children: [
+        {
+          path: "/",
+          element: <LandingPage />,
+        },
+      ],
     },
   ]);
 

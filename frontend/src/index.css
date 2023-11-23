@@ -6,4 +6,8 @@
   html {
     @apply bg-gray-100;
   }
+
+  .stroke {
+    border: 1px solid red;
+  }
 }

@@ -28,7 +28,9 @@ const Footer = () => {
         <p className="text-gray-300 text-center">
           evangadi forum - developed by{" "}
           <a
-            href=""
+            href="https://ellaportfolio.netlify.app/"
+            rel="noreferrer"
+            target="_blank"
             className=" text-secondary hover:text-[#fca547] duration-300"
           >
             Elyas Abebe
