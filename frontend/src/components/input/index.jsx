@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
-const TextInput = ({ type, name, placeholder, onChange, password }) => {
+const TextInput = ({ type, value, name, placeholder, onChange, password }) => {
   const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className="relative">
       <input
         className=" border-2 outline-[rgba(241,151,72,0.5)] block p-2 w-full rounded-md"
         type={password && showPassword ? "text" : type}
         name={name}
+        value={value}
         placeholder={placeholder}
         onChange={onChange}
       />
