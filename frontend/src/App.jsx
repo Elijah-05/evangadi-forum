@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "./pages/landing/index.jsx";
 import SignUp from "./pages/signup/index.jsx";
@@ -6,9 +6,15 @@ import axios from "axios";
 import { useSetAtom } from "jotai";
 import { userData } from "./atoms/index.jsx";
 import Layout from "./layout/index.jsx";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const App = () => {
   const setUserData = useSetAtom(userData);
+
+  useEffect(() => {
+    Aos.init({ duration: 1000, once: true });
+  }, []);
 
   async function checkLoggedIn() {
     let token = localStorage.getItem("auth-token");

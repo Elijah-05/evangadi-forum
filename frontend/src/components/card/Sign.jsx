@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../button";
 import TextInput from "../input";
 
 const Sign = () => {
   return (
-    <div className=" sm:min-w-[450px]  bg-gray-50 rounded-lg px-7 pt-7 pb-10 shadow-lg">
+    <div className=" w-[450px] max-w-full  bg-gray-50 rounded-lg px-7 pt-7 pb-10 shadow-xl">
       <div className="text-center mb-8">
         <h1 className="text-2xl font-bold uppercase">Sign In</h1>
         <h1 className="">Login to your account</h1>
@@ -21,6 +21,7 @@ const Sign = () => {
             type={"password"}
             name={"password"}
             placeholder={"Password"}
+            password
             onChange={null}
           />
         </div>

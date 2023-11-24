@@ -5,14 +5,14 @@ import Footer from "../components/footer";
 
 const Layout = () => {
   return (
-    <main className=" h-screen flex flex-col justify-between">
+    <main className=" min-h-screen  flex flex-col justify-between">
       {/* Header Naviagtion Bar */}
-      <header className=" sticky top-0">
+      <header className="sticky top-0 z-50">
         <NavBar />
       </header>
 
       {/* Main Content Body Section */}
-      <section className="">
+      <section className=" ">
         <Outlet />
       </section>
 
