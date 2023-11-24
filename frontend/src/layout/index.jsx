@@ -17,7 +17,7 @@ const Layout = () => {
       </section>
 
       {/* Footer Section */}
-      <footer className=" ">
+      <footer className=" z-50 ">
         <Footer />
       </footer>
     </main>

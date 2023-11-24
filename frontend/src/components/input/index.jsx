@@ -18,9 +18,9 @@ const TextInput = ({ type, name, placeholder, onChange, password }) => {
           onClick={() => setShowPassword(!showPassword)}
         >
           {!showPassword ? (
-            <FaRegEye className=" text-lg" />
+            <FaRegEye className=" text-lg text-darkBlue" />
           ) : (
-            <FaRegEyeSlash className=" text-lg" />
+            <FaRegEyeSlash className=" text-lg text-darkBlue" />
           )}
         </div>
       )}

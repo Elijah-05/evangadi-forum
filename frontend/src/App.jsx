@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "./pages/landing/index.jsx";
-import SignUp from "./pages/signup/index.jsx";
 import axios from "axios";
 import { useSetAtom } from "jotai";
 import { userData } from "./atoms/index.jsx";
