@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TextInput from "../input";
 import Button from "../button";
 import { userInstance } from "../../axios/instance";
+import { useToasts } from "react-toast-notifications";
 
 const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
   const [passwordInfo, setPasswordInfo] = useState({
@@ -17,6 +18,7 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
     password: "",
   });
   const [registerErrorResponse, setRegisterErrorResponse] = useState("");
+  const { addToast } = useToasts();
 
   const newUserInitial = {
     userName: "",
@@ -47,7 +49,7 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
 
       if (noChar.test(newUser.password)) {
         setPasswordInfo({
-          message: "password must be at least 8 characters",
+          message: "Poor Password",
           strength: "poor",
         });
       }
@@ -66,10 +68,9 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
     }
   }, [newUser.password]);
 
-  console.log("newUserData: ", newUser);
-
   function handleChangePassword(e) {
     setNewUser((prev) => ({ ...prev, password: e.target.value }));
+    setRegisterErrorResponse("");
   }
 
   async function handleCreateAccount(e) {
@@ -79,10 +80,21 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
       .then((data) => {
         console.log("Response: ", data);
         setNewUser(newUserInitial);
+        handleRegister("log_in");
+        addToast("Account Successfully Created!", {
+          appearance: "success",
+          autoDismiss: true,
+          newestOnTop: true,
+        });
       })
       .catch((err) => {
         console.log("error while posting: ", err.response.data.msg);
         setRegisterErrorResponse(err.response.data.msg);
+        addToast(err.response.data.msg, {
+          appearance: "error",
+          autoDismiss: true,
+          newestOnTop: true,
+        });
       });
     console.log("Account Created!");
   }

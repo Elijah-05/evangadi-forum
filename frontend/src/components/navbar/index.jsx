@@ -3,8 +3,20 @@ import { evangadi_logo } from "../../assets";
 import Button from "../button";
 import { IoMenu } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useAtom } from "jotai";
+import { userData } from "../../atoms";
 
 const NavBar = () => {
+  const [userInfo, setUserInfo] = useAtom(userData);
+
+  function handleLogOut(e) {
+    e.preventDefault();
+    if (userInfo) {
+      localStorage.setItem("auth-token", "");
+      setUserInfo(null);
+    }
+  }
+
   return (
     <nav className=" h-20 bg-white shadow-sm">
       <div className="max-w-7xl h-20 mx-auto p-3 flex items-center justify-between">
@@ -26,7 +38,11 @@ const NavBar = () => {
               <a href="">How it Works</a>
             </li>
             <a href="">
-              <Button label={"Sign In"} secondary />
+              <Button
+                label={!userInfo ? "Log In" : "Log out"}
+                secondary
+                onClick={handleLogOut}
+              />
             </a>
           </ul>
         </div>

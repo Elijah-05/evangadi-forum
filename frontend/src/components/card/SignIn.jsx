@@ -1,29 +1,54 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../button";
 import TextInput from "../input";
 import { userInstance } from "../../axios/instance";
+import { useAtom, useSetAtom } from "jotai";
+import { userData } from "../../atoms";
+import { useToasts } from "react-toast-notifications";
 
 const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
+  const [loginError, setLoginError] = useState("");
+  const [userInfo, setUserData] = useAtom(userData);
   const [userCredentials, setUserCredentials] = useState({
     email: "",
     password: "",
   });
+  const { addToast } = useToasts();
 
-  console.log("userCred: ", userCredentials);
+  const navigate = useNavigate();
 
   function handleChangeInput(e) {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
+    setLoginError("");
   }
 
   function handleLogIn(e) {
     e.preventDefault();
     userInstance
       .post("/login", userCredentials)
-      .then((data) => {
-        console.log("response: ", data);
+      .then((response) => {
+        console.log("Token: ", response.data.token);
+        console.log("Response data: ", response.data);
+        localStorage.setItem("auth-token", response.data.token);
+        setUserData(response.data);
+        addToast("Successfully Logged In!", {
+          appearance: "success",
+          autoDismiss: true,
+          newestOnTop: true,
+        });
+        // if (response.data.token) {
+        //   navigate("/home");
+        // }
       })
       .catch((err) => {
         console.log("Unable to log : ", err.response.data);
+        setLoginError(err.response.data.msg);
+        addToast(err.response.data.msg, {
+          appearance: "warning",
+          autoDismiss: true,
+          newestOnTop: true,
+        });
       });
     console.log("sucessfully loged in!");
   }
@@ -64,7 +89,8 @@ const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
         <p className=" text-right p-1 text-sm text-secondaryHover cursor-pointer">
           forgot password?
         </p>
-        <div className=" w-full mt-8 mb-4">
+        <p className=" text-red-500 text-sm ">{loginError}</p>
+        <div className=" w-full mt-4 mb-4">
           <Button
             label={"LOG IN"}
             secondary

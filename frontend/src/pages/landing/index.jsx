@@ -36,11 +36,11 @@ const LandingPage = () => {
 
         <SignUp
           handleLogIn={() => handleToggleSign("log_in")}
+          handleRegister={handleToggleSign}
           signState={signState}
           onAnimation={onAnimation}
         />
       </div>
-
       <Description />
     </div>
   );

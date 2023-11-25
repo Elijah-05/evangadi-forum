@@ -7,6 +7,7 @@ import { userData } from "./atoms/index.jsx";
 import Layout from "./layout/index.jsx";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import HomePage from "./pages/home/index.jsx";
 
 const App = () => {
   const setUserData = useSetAtom(userData);
@@ -14,28 +15,6 @@ const App = () => {
   useEffect(() => {
     Aos.init({ duration: 1000, once: true });
   }, []);
-
-  async function checkLoggedIn() {
-    let token = localStorage.getItem("auth-token");
-    if (token === null) {
-      localStorage.setItem("auth-token", "");
-      token = "";
-    } else {
-      const userRes = await axios.get("http://localhost:4000/api/users", {
-        headers: {
-          "x-auth-token": token,
-        },
-      });
-
-      setUserData({
-        token,
-        user: {
-          id: userRes.data.data.user_id,
-          display_name: userRes.data.data.user_name,
-        },
-      });
-    }
-  }
 
   function logout() {
     setUserData({
@@ -53,7 +32,11 @@ const App = () => {
       children: [
         {
           path: "/",
-          element: <LandingPage />,
+          element: <HomePage />,
+        },
+        {
+          path: "/home",
+          element: <div>Home</div>,
         },
       ],
     },

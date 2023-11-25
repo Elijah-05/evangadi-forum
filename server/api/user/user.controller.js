@@ -81,7 +81,7 @@ module.exports = {
 
   getUserById: (req, res) => {
     // console.log("Second parameter Started! with request: ", req);
-    userById(req.id, (err, results) => {
+    userById(req.id, (err, [results]) => {
       if (err) {
         console.log("Error while getting user by id: ", err);
         return res.status(500).json({ msg: "database connection err" });
