@@ -9,8 +9,11 @@ const LandingPage = () => {
   const [onAnimation, setOnAnimation] = useState(false);
 
   useEffect(() => {
-    Aos.init({ duration: 650, once: true });
-  }, []);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [signState]);
 
   function handleToggleSign(sign) {
     setSignState(sign);

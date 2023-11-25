@@ -18,8 +18,8 @@ const NavBar = () => {
   }
 
   return (
-    <nav className=" h-20 bg-white shadow-sm">
-      <div className="max-w-7xl h-20 mx-auto p-3 flex items-center justify-between">
+    <nav className=" h-20 backdrop-blur-sm bg-white bg-opacity-50 shadow-sm">
+      <div className="max-w-6xl h-20 mx-auto py-3 flex items-center justify-between">
         <div className="">
           <Link to={"/"}>
             <img
