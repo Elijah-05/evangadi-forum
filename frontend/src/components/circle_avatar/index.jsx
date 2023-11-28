@@ -16,16 +16,13 @@ const CircleAvatar = ({ imagePath, alt, size = 11 }) => {
     };
   }, []);
 
-  if (screenWidth < 300) {
-    size = 25;
-  }
   if (screenWidth <= 768) {
-    size = 30;
+    size = 25;
   }
 
   return (
     <div
-      className={` overflow-hidden rounded-full ring-[3px] ring-darkBlue`}
+      className={` opacity-50 overflow-hidden rounded-full ring-[3px] ring-darkBlue`}
       style={{ height: size, width: size }}
     >
       <img className=" object-cover w-full h-full" src={imagePath} alt={alt} />

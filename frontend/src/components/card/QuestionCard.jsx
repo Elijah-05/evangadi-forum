@@ -16,25 +16,27 @@ const QuestionCard = ({ questionData, noOfAnswers, onClick, forAnswer }) => {
 
   return (
     <div
-      className={`flex flex-col md:flex-row items-start gap-4 ${
-        !forAnswer && "bg-gray-200"
+      className={`flex flex-col md:flex-row items-start gap-2 md:gap-4 ${
+        !forAnswer && "bg-slate-100"
       } p-2 sm:p-3 rounded-md cursor-pointer`}
       key={question_id}
       onClick={() => onClick && onClick(questionData)}
     >
       <div className="flex flex-row md:flex-col mt-1 shrink-0 max-w-min  items-center gap-2">
-        <CircleAvatar imagePath={user_profile} size={46} />
-        <p className="">{noOfAnswers || 0}</p>
+        <CircleAvatar imagePath={user_profile} size={35} />
+        <p className=" opacity-75">{noOfAnswers || 0}</p>
       </div>
       <div className=" w-full  flex items-center justify-between">
         <div className="">
-          <p className="mb-[2px] text-secondary">
+          <p className="mb-[2px] text-sm md:text-base text-secondary opacity-60 font-mono">
             {`${first_name} ${last_name}`}
           </p>
-          <p className=" text-lg font-medium -mt-2 text-primaryHover">
+          <p className="text-base sm:text-lg font-medium -mt-2 text-primaryHover">
             {question}
           </p>
-          <p className=" text-gray-500 mr-4">{question_description}</p>
+          <p className="text-sm sm:text-base text-gray-500 mr-4">
+            {question_description}
+          </p>
         </div>
         {!forAnswer && (
           <div className="mr-3">

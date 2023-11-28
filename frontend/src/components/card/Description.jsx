@@ -4,8 +4,10 @@ const Description = () => {
   return (
     <div data-aos="fade-left" className=" w-full max-w-sm p-4 sm:p-0">
       <p className=" text-secondary">About</p>
-      <h1 className=" text-3xl  font-bold my-2">Evangadi Networks Q&A</h1>
-      <p className="">
+      <h1 className=" text-3xl  font-bold my-2 text-darkBlue">
+        Evangadi Networks Q&A
+      </h1>
+      <p className=" text-darkBlue opacity-80">
         No matter what stage of life you are in, whether you’re just starting
         elementary school or being promoted to CEO of a Fortune 500 company, you
         have much to offer to those who are trying to follow in your footsteps.{" "}

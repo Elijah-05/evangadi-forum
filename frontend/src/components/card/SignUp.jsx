@@ -111,11 +111,11 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
           : onAnimation
           ? " -translate-y-[650px] absolute opacity-50 duration-700 "
           : "translate-y-56 absolute opacity-0 -z-10 duration-[1200ms]"
-      } w-full sm:w-[480px] max-w-full  bg-gray-50 rounded-lg px-7 pt-7 pb-10 shadow-xl  `}
+      } w-full sm:w-[480px] max-w-full  bg-white rounded-lg px-7 pt-7 pb-10 shadow-xl  `}
     >
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold uppercase">Register</h1>
-        <h1 className=" text-darkBlue">Join evangadi network</h1>
+        <h1 className="text-2xl font-bold uppercase text-darkBlue">Register</h1>
+        <h1 className=" text-darkBlue opacity-90">Join evangadi network</h1>
       </div>
       <form className=" w-full">
         <div className="grid gap-4">
@@ -195,7 +195,7 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
         <p className=" text-center text-red-500 text-base">
           {registerErrorResponse}
         </p>
-        <div className=" mt-3 mb-4">
+        <div className=" mt-3">
           <Button
             label={"SUBMIT"}
             color={"bg-[#6172c4]"}

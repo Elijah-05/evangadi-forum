@@ -9,6 +9,7 @@ import HomePage from "./pages/home/index.jsx";
 import AskQuestion from "./pages/ask_question/index.jsx";
 import { userInstance } from "./axios/instance.jsx";
 import Answer from "./pages/answer/index.jsx";
+import PageNotFound from "./pages/page_not_found/index.jsx";
 
 const App = () => {
   const [userInfo, setUserInfo] = useAtom(userData);
@@ -47,6 +48,7 @@ const App = () => {
     {
       path: "/",
       element: <Layout />,
+      errorElement: <PageNotFound />,
       children: [
         {
           path: "/",

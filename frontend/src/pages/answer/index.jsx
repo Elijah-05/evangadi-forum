@@ -80,7 +80,7 @@ const Answer = () => {
 
   return (
     <div className=" min-h-screen max-w-6xl mx-auto">
-      <div className=" sticky top-20 z-10 bg-gray-200 pt-2 md:pt-8 pb-4 px-2 rounded-b-md">
+      <div className=" sticky top-20 z-10 bg-gray-200 pt-2 md:pt-4 pb-2 px-2 rounded-b-md">
         <QuestionCard
           questionData={passed_Question_Data}
           noOfAnswers={fetchedAnswer?.length}
@@ -92,7 +92,7 @@ const Answer = () => {
         <div className="pl-4 md:pl-7 ">
           <span className=" font-medium">Ans</span>
         </div>
-        <div className="pl-4  md:pr-4 md:pl-0 flex flex-col mr-4 gap-6">
+        <div className="pl-4 md:pr-4 md:pl-0 flex flex-col mr-4 gap-6">
           {fetchedAnswer?.map((ans) => {
             return <AnswerCard answerData={ans} />;
           })}

@@ -4,19 +4,19 @@ import { questions, userData } from "../../atoms";
 import BuletList from "../../components/list/BuletList";
 import Button from "../../components/button";
 import { questionInstance } from "../../axios/instance";
+import { useNavigate } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 
 const AskQuestion = () => {
   const [userInfo] = useAtom(userData);
-  const [getQuestions, setQuestions] = useAtom(questions);
   const [question, setQuestion] = useState({
     questionTitle: "",
     questionDescription: "",
   });
   const [error, setError] = useState();
+  const addToast = useToasts();
 
-  console.log("User Info: ", userInfo);
-  console.log("Question: ", question);
-  console.log("GetQuestions +++; ", getQuestions);
+  const navigate = useNavigate();
 
   function handleOnChange(e) {
     console.log("handleCahgne on elelmdnt: ", e.target);
@@ -40,15 +40,19 @@ const AskQuestion = () => {
     return isError;
   }
 
-  function handleSubmitQuestion(e) {
+  async function handleSubmitQuestion(e) {
     e.preventDefault();
     if (!validation()) {
       question.userId = userInfo?.user?.id;
-      console.log("Going to be submited Question: ", question);
-      questionInstance
+      await questionInstance
         .post("/ask", question)
         .then((response) => {
-          console.log("Submitted Response: ", response);
+          navigate("/");
+          setQuestion({ questionTitle: "", questionDescription: "" });
+          addToast("Question Successfully Posted!", {
+            appearance: "success",
+            autoDismiss: true,
+          });
         })
         .catch((err) => {
           console.log("unable to submit: ", err);
@@ -58,8 +62,8 @@ const AskQuestion = () => {
 
   return (
     <div className="min-h-screen max-w-6xl mx-auto ">
-      <div className=" bg-gray-300 pt-8 pb-6 px-4 rounded-b-md">
-        <h1 className=" text-2xl text-center pb-2 text-darkBlue font-medium">
+      <div className=" bg-slate-200 pt-8 pb-6 px-2 rounded-b-md">
+        <h1 className="text-xl sm:text-2xl text-center text-darkBlue font-medium">
           Steps to write a good question
         </h1>
         <ul className=" mt-4 ml-0 sm:ml-4">
@@ -73,8 +77,8 @@ const AskQuestion = () => {
           <BuletList text={"Review your question and post it to the site"} />
         </ul>
       </div>
-      <div className=" mt-14 sm:mt-28 md:mt-40 px-2 ">
-        <h1 className=" text-2xl font-medium text-center text-darkBlue mb-4">
+      <div className=" mt-14 sm:mt-28 md:mt-32 px-2 ">
+        <h1 className=" text-xl sm:text-2xl font-medium text-center text-darkBlue mb-4">
           Ask Question
         </h1>
         <form className="">

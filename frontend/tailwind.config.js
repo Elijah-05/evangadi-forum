@@ -11,6 +11,9 @@ export default {
         darkBlue: "#3a4559",
         darkGray: "f5f5f5",
       },
+      screens: {
+        xs: "380px",
+      },
     },
   },
   plugins: [],

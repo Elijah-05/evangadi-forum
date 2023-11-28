@@ -11,7 +11,7 @@ const Button = ({
 }) => {
   return (
     <button
-      className={` w-full ${
+      className={` w-full h-11 ${
         color
           ? color + " hover:bg-opacity-80"
           : primary
@@ -21,7 +21,7 @@ const Button = ({
           : "bg-gray"
       }  ${bold && "font-bold"} ${
         shadow && " shadow-md"
-      } rounded-md px-6 py-2 text-[#fff] duration-300`}
+      } rounded-md px-6 py-2 text-[#fff] text-sm sm:text-base duration-300`}
       onClick={onClick}
     >
       {label}

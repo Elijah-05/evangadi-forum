@@ -66,11 +66,11 @@ const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
           : onAnimation
           ? " -translate-y-[550px] absolute opacity-50   duration-700"
           : "translate-y-96 absolute opacity-0 -z-10 duration-[1200ms]"
-      } w-full sm:w-[480px] min-h-[500px] max-w-full flex flex-col items-center justify-center bg-gray-50 rounded-lg px-7 pt-7 pb-10 shadow-xl `}
+      } w-full sm:w-[480px] min-h-[500px] max-w-full flex flex-col items-center justify-center bg-white rounded-lg px-7 pt-7 pb-10 shadow-xl `}
     >
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold uppercase">Sign In</h1>
-        <h1 className="">Login to your account</h1>
+        <h1 className="text-2xl font-bold uppercase text-darkBlue">Sign In</h1>
+        <h1 className=" text-darkBlue opacity-90">Login to your account</h1>
       </div>
 
       <form className=" w-full">
@@ -95,7 +95,7 @@ const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
           forgot password?
         </p>
         <p className=" text-red-500 text-sm ">{loginError}</p>
-        <div className=" w-full mt-4 mb-4">
+        <div className=" w-full mt-4">
           <Button
             label={"LOG IN"}
             secondary

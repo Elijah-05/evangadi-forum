@@ -32,11 +32,11 @@ const NavBar = () => {
 
   return (
     <nav className=" h-20 backdrop-blur-sm bg-white bg-opacity-50 shadow-sm px-2">
-      <div className="max-w-6xl h-20 mx-auto py-3 flex items-center justify-between">
-        <div className="">
+      <div className=" max-w-6xl h-20 mx-auto py-3 flex items-center justify-between">
+        <div className=" p-2 w-40 hover:scale-[1.03] opacity-75 hover:opacity-100 cursor-pointer duration-300">
           <Link to={"/"}>
             <img
-              className="w-40 hover:scale-105 cursor-pointer duration-300"
+              className=" w-full object-contain"
               src={evangadi_logo}
               alt=""
             />
@@ -45,7 +45,7 @@ const NavBar = () => {
         <div className="hidden sm:flex items-center ">
           <ul className="flex items-center gap-3">
             <li className=" font-medium hover:text-secondary duration-300">
-              <a href="">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li className=" font-medium hover:text-secondary duration-300">
               <a href="">How it Works</a>

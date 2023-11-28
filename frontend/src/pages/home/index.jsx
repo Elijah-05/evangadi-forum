@@ -81,27 +81,27 @@ const HomePage = () => {
         <LandingPage />
       ) : (
         <div className="max-w-6xl mx-auto">
-          <div className="pt-10 px-4 rounded-b-md sticky top-20 left-0 right-0 flex justify-between items-center bg-gray-300 shadow-md">
-            <h1 className=" text-2xl text-darkBlue font-medium">
+          <div className="z-10 pt-6 xs:pt-10 pb-4 gap-2 px-4 rounded-b-md sticky top-20 left-0 right-0 flex flex-col xs:flex-row justify-between xs:items-center bg-slate-200 shadow-sm">
+            <h1 className=" text-xl sm:text-2xl text-center md:text-left text-darkBlue font-medium">
               Welcome:{" "}
               <span className=" text-darkBlue">
                 {userInfo?.user?.display_name}
               </span>
             </h1>
-            <Link to={"/ask"} className=" my-4">
+            <Link to={"/ask"} className="">
               <Button label={"Ask Question"} primary />
             </Link>
           </div>
 
-          <div className="mt-20 px-2 md:px-2 md:mx-4 xl:mx-0 ">
-            <h1 className=" text-2xl text-center md:text-left font-medium">
+          <div className=" mt-10 px-2 md:px-2 md:mx-4 xl:mx-0 ">
+            <h1 className=" text-xl xs:text-2xl text-center md:text-left font-medium">
               Questions{" "}
-              <span className=" text-xl text-secondary">
+              <span className="text-lg xs:text-xl text-secondary">
                 {getQuestions?.length}
               </span>
             </h1>
             {!isLoading ? (
-              <div className="mt-6 flex flex-col gap-4">
+              <div className="mt-2 flex flex-col gap-4 mb-20">
                 {getQuestions?.map((question) => {
                   return (
                     <QuestionCard
