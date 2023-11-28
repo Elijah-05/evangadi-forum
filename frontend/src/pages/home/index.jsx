@@ -1,93 +1,125 @@
 import React, { useEffect, useState } from "react";
 import LandingPage from "../landing";
-import { userInstance } from "../../axios/instance";
+import {
+  answerInstance,
+  questionInstance,
+  userInstance,
+} from "../../axios/instance";
 import { useAtom } from "jotai";
-import { userData } from "../../atoms";
-import { user_profile } from "../../assets";
+import { questions, userData } from "../../atoms";
 import Button from "../../components/button";
-import CircleAvatar from "../../components/circle_avatar";
-import { FaChevronDown } from "react-icons/fa6";
+import { Link, useNavigate } from "react-router-dom";
+import QuestionCard from "../../components/card/QuestionCard";
 
 const HomePage = () => {
   const [userInfo, setUserInfo] = useAtom(userData);
+  const [getQuestions, setQuestions] = useAtom(questions);
+  const [answers, setAnswers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const token = localStorage.getItem("auth-token");
 
-  console.log("userINfo at Home: ", userInfo);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
+  }, []);
 
-    const checkLoggedIn = async () => {
-      let token = localStorage.getItem("auth-token");
-      if (token === null) {
-        localStorage.setItem("auth-token", "");
-        token = "";
-        setUserInfo(null);
-      } else {
-        const response = await userInstance.get("/", {
+  useEffect(() => {
+    if (userInfo?.user?.display_name) {
+      fetchAllQuestions();
+      fetchAllAnswers();
+    }
+  }, [userInfo]);
+
+  const fetchAllQuestions = async () => {
+    setIsLoading(true);
+    !!token &&
+      (await questionInstance
+        .get("/", {
           headers: {
             "x-auth-token": token,
           },
-        });
-        console.log("checking the token response...", response);
-        setUserInfo({
-          token,
-          user: {
-            id: response.data.data.user_id,
-            display_name: response.data.data.user_name,
-          },
-        });
-      }
-    };
-    checkLoggedIn();
-  }, []);
+        })
+        .then((response) => {
+          console.log("QuestionFetched!...");
+          setQuestions(response.data);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log("Unable to fetch questions: ", err);
+          setIsLoading(false);
+        }));
+  };
+
+  const fetchAllAnswers = async () => {
+    await answerInstance
+      .get("/all", {
+        headers: {
+          "x-auth-token": token,
+        },
+      })
+      .then((response) => {
+        console.log("Response for fetching all answers: ", response);
+        setAnswers(response.data);
+      })
+      .catch((err) => {
+        console.log("Error while fetching all ansers: ", err);
+      });
+  };
+
+  function handleQuestionDetail(question) {
+    console.log("Question detail Page for question_id: ", question);
+    navigate(`/answers/${question.question_id}`, { state: { question } });
+  }
 
   return (
-    <div className="min-h-screen pt-10 lg:pt-0 border-2 z-50 border-green-500">
+    <div className="min-h-screen ">
       {!userInfo?.token ? (
         <LandingPage />
       ) : (
-        <div className="max-w-6xl mx-auto ">
-          <div className="pt-10 px-4 rounded-b-md sticky top-20 left-0 right-0 flex justify-between items-center bg-gray-300">
-            <h1 className=" text-2xl font-medium">
+        <div className="max-w-6xl mx-auto">
+          <div className="pt-10 px-4 rounded-b-md sticky top-20 left-0 right-0 flex justify-between items-center bg-gray-300 shadow-md">
+            <h1 className=" text-2xl text-darkBlue font-medium">
               Welcome:{" "}
-              <span className=" text-primary">
+              <span className=" text-darkBlue">
                 {userInfo?.user?.display_name}
               </span>
             </h1>
-            <div className=" my-4">
+            <Link to={"/ask"} className=" my-4">
               <Button label={"Ask Question"} primary />
-            </div>
+            </Link>
           </div>
 
-          <div className="mt-20">
+          <div className="mt-20 px-2">
             <h1 className=" text-2xl font-medium">
-              Questions <span className=" text-xl text-secondary">78</span>
+              Questions{" "}
+              <span className=" text-xl text-secondary">
+                {getQuestions?.length}
+              </span>
             </h1>
-            <div className="mt-6">
-              <div className="flex items-start gap-4 bg-gray-200 p-3 rounded-md cursor-pointer">
-                <div className=" mt-1 shrink-0 max-w-min flex flex-col items-center gap-2">
-                  <CircleAvatar imagePath={user_profile} size={46} />
-                  <p className="">13</p>
-                </div>
-                <div className=" w-full  flex items-center justify-between">
-                  <div className="">
-                    <p className="mb-[2px] text-secondaryHover">
-                      {userInfo?.user?.display_name}
-                    </p>
-                    <p className=" text-lg font-medium -my-2">
-                      What is HTML in modern web development?
-                    </p>
-                    <p className="mt-[2px] text-gray-500">description</p>
-                  </div>
-                  <div className="mr-3">
-                    <FaChevronDown />
-                  </div>
-                </div>
+            {!isLoading ? (
+              <div className="mt-6 flex flex-col gap-4">
+                {getQuestions?.map((question) => {
+                  return (
+                    <QuestionCard
+                      questionData={question}
+                      noOfAnswers={
+                        answers?.filter(
+                          (ans) => ans.question_id === question.question_id
+                        ).length
+                      }
+                      onClick={handleQuestionDetail}
+                      key={question.question_id}
+                    />
+                  );
+                })}
               </div>
-            </div>
+            ) : (
+              <div className="">No qest</div>
+            )}
           </div>
         </div>
       )}

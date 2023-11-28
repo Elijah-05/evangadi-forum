@@ -16,7 +16,6 @@ const auth = (req, res, next) => {
     }
 
     req.id = verified.id;
-    console.log("Verified: ", verified);
 
     next();
   } catch (err) {

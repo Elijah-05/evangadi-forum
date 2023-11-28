@@ -84,7 +84,6 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
         addToast("Account Successfully Created!", {
           appearance: "success",
           autoDismiss: true,
-          newestOnTop: true,
         });
       })
       .catch((err) => {
@@ -93,7 +92,6 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
         addToast(err.response.data.msg, {
           appearance: "error",
           autoDismiss: true,
-          newestOnTop: true,
         });
       });
     console.log("Account Created!");

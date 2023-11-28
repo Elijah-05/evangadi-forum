@@ -1,3 +1,6 @@
 import { atom, useAtom } from "jotai";
 
-export const userData = atom(null);
+const userData = atom(null);
+const questions = atom([]);
+
+export { userData, questions };

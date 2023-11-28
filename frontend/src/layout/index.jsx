@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "../components/navbar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../components/footer";
 
 const Layout = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      // behavior: "smooth",
+    });
+  }, [location]);
+
   return (
     <main className=" min-h-screen  flex flex-col ">
       {/* Header Naviagtion Bar */}

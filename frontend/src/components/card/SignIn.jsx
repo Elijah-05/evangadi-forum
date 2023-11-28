@@ -35,7 +35,6 @@ const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
         addToast("Successfully Logged In!", {
           appearance: "success",
           autoDismiss: true,
-          newestOnTop: true,
         });
         // if (response.data.token) {
         //   navigate("/home");
@@ -47,7 +46,6 @@ const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
         addToast(err.response.data.msg, {
           appearance: "warning",
           autoDismiss: true,
-          newestOnTop: true,
         });
       });
     console.log("sucessfully loged in!");
@@ -61,7 +59,7 @@ const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
           : onAnimation
           ? " -translate-y-[550px] absolute opacity-50   duration-700"
           : "translate-y-96 absolute opacity-0 -z-10 duration-[1200ms]"
-      } w-full sm:w-[480px] min-h-[500px] max-w-full  bg-gray-50 rounded-lg px-7 pt-7 pb-10 shadow-xl `}
+      } w-full sm:w-[480px] min-h-[500px] max-w-full flex flex-col items-center justify-center bg-gray-50 rounded-lg px-7 pt-7 pb-10 shadow-xl `}
     >
       <div className="text-center mb-8">
         <h1 className="text-2xl font-bold uppercase">Sign In</h1>

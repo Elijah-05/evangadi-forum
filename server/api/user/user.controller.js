@@ -80,7 +80,7 @@ module.exports = {
   },
 
   getUserById: (req, res) => {
-    // console.log("Second parameter Started! with request: ", req);
+    console.log("Second parameter Started! with request: ", req.id);
     userById(req.id, (err, [results]) => {
       if (err) {
         console.log("Error while getting user by id: ", err);
