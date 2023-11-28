@@ -45,7 +45,7 @@ const HomePage = () => {
         })
         .then((response) => {
           console.log("QuestionFetched!...");
-          setQuestions(response.data);
+          setQuestions(response.data.reverse());
           setIsLoading(false);
         })
         .catch((err) => {
@@ -93,8 +93,8 @@ const HomePage = () => {
             </Link>
           </div>
 
-          <div className="mt-20 px-2">
-            <h1 className=" text-2xl font-medium">
+          <div className="mt-20 px-2 md:px-2 md:mx-4 xl:mx-0 ">
+            <h1 className=" text-2xl text-center md:text-left font-medium">
               Questions{" "}
               <span className=" text-xl text-secondary">
                 {getQuestions?.length}

@@ -3,10 +3,12 @@ import Aos from "aos";
 import Description from "../../components/card/Description";
 import SignIn from "../../components/card/SignIn";
 import SignUp from "../../components/card/SignUp";
+import { useAtom } from "jotai";
+import { logAnimation, logState } from "../../atoms";
 
 const LandingPage = () => {
-  const [signState, setSignState] = useState("log_in");
-  const [onAnimation, setOnAnimation] = useState(false);
+  const [signState, setSignState] = useAtom(logState);
+  const [onAnimation, setOnAnimation] = useAtom(logAnimation);
 
   useEffect(() => {
     window.scrollTo({

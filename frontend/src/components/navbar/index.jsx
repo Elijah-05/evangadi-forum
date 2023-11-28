@@ -4,9 +4,11 @@ import Button from "../button";
 import { IoMenu } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import { userData } from "../../atoms";
+import { logAnimation, logState, userData } from "../../atoms";
 
 const NavBar = () => {
+  const [signState, setSignState] = useAtom(logState);
+  const [onAnimation, setOnAnimation] = useAtom(logAnimation);
   const [userInfo, setUserInfo] = useAtom(userData);
   const navigate = useNavigate();
 
@@ -16,7 +18,16 @@ const NavBar = () => {
       localStorage.setItem("auth-token", "");
       setUserInfo(null);
       navigate("/");
-    } else navigate("/");
+      setSignState("log_in");
+    } else {
+      navigate("/");
+      signState == "log_in" ? setSignState("sign_up") : setSignState("log_in");
+    }
+
+    setOnAnimation(true);
+    setTimeout(() => {
+      setOnAnimation(false); //Animation end after 700ms
+    }, 700);
   }
 
   return (
@@ -41,8 +52,15 @@ const NavBar = () => {
             </li>
             <a href="">
               <Button
-                label={!userInfo ? "Log In" : "Log out"}
-                secondary
+                label={
+                  userInfo
+                    ? "Log out"
+                    : signState == "log_in"
+                    ? "Register"
+                    : "Sign In"
+                }
+                primary={!userInfo && signState == "log_in"}
+                secondary={!userInfo && signState !== "sign_up" ? false : true}
                 onClick={handleLogOutLogIn}
               />
             </a>

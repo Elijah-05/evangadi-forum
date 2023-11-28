@@ -3,22 +3,33 @@ import { useNavigate } from "react-router-dom";
 import Button from "../button";
 import TextInput from "../input";
 import { userInstance } from "../../axios/instance";
-import { useAtom, useSetAtom } from "jotai";
-import { userData } from "../../atoms";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { registered, userData } from "../../atoms";
 import { useToasts } from "react-toast-notifications";
 
 const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
+  const [savedRegistered, setSavedRegistered] = useAtom(registered);
   const [loginError, setLoginError] = useState("");
   const [userInfo, setUserData] = useAtom(userData);
   const [userCredentials, setUserCredentials] = useState({
-    email: "",
-    password: "",
+    email: savedRegistered?.email || "",
+    password: savedRegistered?.password || "",
   });
   const { addToast } = useToasts();
+
+  useEffect(() => {
+    setUserCredentials({
+      email: savedRegistered?.email,
+      password: savedRegistered?.password,
+    });
+  }, [savedRegistered]);
 
   const navigate = useNavigate();
 
   function handleChangeInput(e) {
+    // if (e.target.value == "") {
+    setSavedRegistered(null);
+    // }
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
     setLoginError("");
   }
@@ -28,17 +39,13 @@ const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
     userInstance
       .post("/login", userCredentials)
       .then((response) => {
-        console.log("Token: ", response.data.token);
-        console.log("Response data: ", response.data);
         localStorage.setItem("auth-token", response.data.token);
         setUserData(response.data);
         addToast("Successfully Logged In!", {
           appearance: "success",
           autoDismiss: true,
         });
-        // if (response.data.token) {
-        //   navigate("/home");
-        // }
+        setSavedRegistered(null);
       })
       .catch((err) => {
         console.log("Unable to log : ", err.response.data);

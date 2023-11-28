@@ -11,18 +11,18 @@ const QuestionCard = ({ questionData, noOfAnswers, onClick, forAnswer }) => {
       first_name: "first name",
       last_name: "last name",
       question_description:
-        "Question description here... this is a place holder befor you pass a real question desctiption this shows how it looks Question description here... this is a place holder befor you pass a real question desctiption this shows how it looks Question description here... this is a place holder befor you pass a real question desctiption this shows how it looks Question description here... this is a place holder befor you pass a real question desctiption this shows how it looks Question description here... this is a place holder befor you pass a real question desctiption this shows how it looks Question description here... this is a place holder befor you pass a real question desctiption this shows how it looks",
+        "Question description here... this is a place holder befor you pass a real question desctiption this shows how it looks Question description here...",
     };
 
   return (
     <div
-      className={`flex items-start gap-4 ${
+      className={`flex flex-col md:flex-row items-start gap-4 ${
         !forAnswer && "bg-gray-200"
-      } p-3 rounded-md cursor-pointer`}
+      } p-2 sm:p-3 rounded-md cursor-pointer`}
       key={question_id}
       onClick={() => onClick && onClick(questionData)}
     >
-      <div className=" mt-1 shrink-0 max-w-min flex flex-col items-center gap-2">
+      <div className="flex flex-row md:flex-col mt-1 shrink-0 max-w-min  items-center gap-2">
         <CircleAvatar imagePath={user_profile} size={46} />
         <p className="">{noOfAnswers || 0}</p>
       </div>
@@ -34,9 +34,7 @@ const QuestionCard = ({ questionData, noOfAnswers, onClick, forAnswer }) => {
           <p className=" text-lg font-medium -mt-2 text-primaryHover">
             {question}
           </p>
-          <p className=" text-gray-500 text-justify mr-4">
-            {question_description}
-          </p>
+          <p className=" text-gray-500 mr-4">{question_description}</p>
         </div>
         {!forAnswer && (
           <div className="mr-3">

@@ -3,8 +3,11 @@ import TextInput from "../input";
 import Button from "../button";
 import { userInstance } from "../../axios/instance";
 import { useToasts } from "react-toast-notifications";
+import { useSetAtom } from "jotai";
+import { registered } from "../../atoms";
 
 const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
+  const saveRegistered = useSetAtom(registered);
   const [passwordInfo, setPasswordInfo] = useState({
     message: "",
     color: "",
@@ -80,6 +83,10 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
       .then((data) => {
         console.log("Response: ", data);
         setNewUser(newUserInitial);
+        saveRegistered({
+          email: newUser.email,
+          password: newUser.password,
+        });
         handleRegister("log_in");
         addToast("Account Successfully Created!", {
           appearance: "success",
@@ -94,7 +101,6 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
           autoDismiss: true,
         });
       });
-    console.log("Account Created!");
   }
 
   return (
