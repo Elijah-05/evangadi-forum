@@ -81,7 +81,7 @@ const HomePage = () => {
         <LandingPage />
       ) : (
         <div className="max-w-6xl mx-auto">
-          <div className="z-10 pt-6 xs:pt-10 pb-4 gap-2 px-4 rounded-b-md sticky top-20 left-0 right-0 flex flex-col xs:flex-row justify-between xs:items-center bg-slate-200 shadow-sm">
+          <div className="z-10 py-4 xs:py-4  gap-2 px-4 rounded-md sticky top-[88px] left-0 right-0 flex flex-col xs:flex-row justify-between xs:items-center bg-slate-200 shadow-[6px_8px_12px_0px_rgba(0,0,0,0.14)]">
             <h1 className=" text-xl sm:text-2xl text-center md:text-left text-darkBlue font-medium">
               Welcome:{" "}
               <span className=" text-darkBlue">
@@ -94,9 +94,9 @@ const HomePage = () => {
           </div>
 
           <div className=" mt-10 px-2 md:px-2 md:mx-4 xl:mx-0 ">
-            <h1 className=" text-xl xs:text-2xl text-center md:text-left font-medium">
+            <h1 className="ml-1 text-xl xs:text-xl text-center md:text-left font-medium">
               Questions{" "}
-              <span className="text-lg xs:text-xl text-secondary">
+              <span className="text-lg xs:text-lg text-secondary">
                 {getQuestions?.length}
               </span>
             </h1>

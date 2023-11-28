@@ -16,9 +16,10 @@ const QuestionCard = ({ questionData, noOfAnswers, onClick, forAnswer }) => {
 
   return (
     <div
-      className={`flex flex-col md:flex-row items-start gap-2 md:gap-4 ${
-        !forAnswer && "bg-slate-100"
-      } p-2 sm:p-3 rounded-md cursor-pointer`}
+      className={`group flex flex-col md:flex-row items-start gap-2 md:gap-4 ${
+        !forAnswer &&
+        "bg-slate-100 hover:bg-slate-200 scale-[0.995] hover:scale-[1.005] hover:shadow-[6px_5px_12px_0px_rgba(0,0,0,0.15)]"
+      } p-2 sm:p-3 rounded-md cursor-pointer duration-500`}
       key={question_id}
       onClick={() => onClick && onClick(questionData)}
     >
@@ -39,7 +40,7 @@ const QuestionCard = ({ questionData, noOfAnswers, onClick, forAnswer }) => {
           </p>
         </div>
         {!forAnswer && (
-          <div className="mr-3">
+          <div className=" text-xs sm:text-base mr-3 sm:-translate-x-4 sm:group-hover:translate-x-0 text-slate-600 -rotate-90 duration-500">
             <FaChevronDown />
           </div>
         )}
