@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import QuestionCard from "../../components/card/QuestionCard";
 import { useLocation, useParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
-import { questions, userData } from "../../atoms";
+import { darkTheme, questions, userData } from "../../atoms";
 import Button from "../../components/button";
 import AnswerCard from "../../components/card/AnswerCard";
 import { answerInstance } from "../../axios/instance";
@@ -10,6 +10,7 @@ import { answerInstance } from "../../axios/instance";
 const Answer = () => {
   const { question_id } = useParams();
   const userInfo = useAtomValue(userData);
+  const isDark = useAtomValue(darkTheme);
   const getQuestions = useAtomValue(questions);
   const [fetchedAnswer, setFetchedAnswer] = useState([]);
   const [answerInput, setAnswerInput] = useState("");
@@ -77,7 +78,11 @@ const Answer = () => {
 
   return (
     <div className=" min-h-screen max-w-6xl mx-auto">
-      <div className=" sticky top-20 z-10 bg-gray-200 pt-2 md:pt-4 pb-2 px-2 rounded-b-md">
+      <div
+        className={` sticky top-20 z-10 ${
+          isDark ? " text-slate-500" : " text-slate-400"
+        } pt-2 md:pt-4 pb-2 px-2 rounded-b-md`}
+      >
         <QuestionCard
           questionData={passed_Question_Data}
           noOfAnswers={fetchedAnswer?.length}
@@ -86,7 +91,11 @@ const Answer = () => {
       </div>
 
       <div className=" flex flex-col md:flex-row mt-3 gap-2 sm:gap-7">
-        <div className="pl-4 md:pl-7 ">
+        <div
+          className={`pl-4 md:pl-7 ${
+            isDark ? " text-slate-300" : " text-darkBlue"
+          }`}
+        >
           <span className=" font-medium">Ans</span>
         </div>
         <div className="pl-4 md:pr-4 md:pl-0 flex flex-col mr-4 gap-6">
@@ -102,7 +111,7 @@ const Answer = () => {
           //   cols={30}
           className={`block w-full min-h-[80px] h-32 max-h-96 p-2 border-2 outline-[rgba(241,151,72,0.5)] rounded-md ${
             error && "placeholder-red-400"
-          }`}
+          } ${isDark ? "bg-darkBlue text-white" : "bg-white"}`}
           type="text"
           placeholder={error ? error : "Write your answer here..."}
           id="answer"

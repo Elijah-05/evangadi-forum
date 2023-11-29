@@ -3,10 +3,14 @@ import { evangadi_logo_white } from "../../assets";
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa6";
 import FooterList from "../list/FooterList";
 import { footer_data } from "../../../data";
+import { useAtomValue } from "jotai";
+import { darkTheme } from "../../atoms";
 
 const Footer = () => {
+  const isDark = useAtomValue(darkTheme);
+
   return (
-    <div className=" bg-darkBlue p-8">
+    <div className={` p-8  ${isDark ? "bg-black" : "bg-darkBlue"} `}>
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row gap-8 justify-between ">
         <div className=" flex flex-col gap-4 mt-1">
           <img

@@ -3,11 +3,12 @@ import TextInput from "../input";
 import Button from "../button";
 import { userInstance } from "../../axios/instance";
 import { useToasts } from "react-toast-notifications";
-import { useSetAtom } from "jotai";
-import { registered } from "../../atoms";
+import { useAtomValue, useSetAtom } from "jotai";
+import { darkTheme, registered } from "../../atoms";
 
 const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
   const saveRegistered = useSetAtom(registered);
+  const isDark = useAtomValue(darkTheme);
   const [passwordInfo, setPasswordInfo] = useState({
     message: "",
     color: "",
@@ -110,11 +111,25 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
           : onAnimation
           ? " -translate-y-[650px] absolute opacity-50 duration-700 "
           : "translate-y-56 absolute opacity-0 -z-10 duration-[1200ms]"
-      } w-full sm:w-[480px] max-w-full  bg-white rounded-lg px-7 pt-7 pb-10 shadow-xl  `}
+      } w-full sm:w-[480px] max-w-full  ${
+        isDark ? "bg-slate-600" : "bg-white"
+      } rounded-lg px-7 pt-7 pb-10 shadow-xl  `}
     >
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold uppercase text-darkBlue">Register</h1>
-        <h1 className=" text-darkBlue opacity-90">Join evangadi network</h1>
+        <h1
+          className={`text-2xl font-bold uppercase text-darkBlue  ${
+            isDark ? "text-white" : "text-darkBlue"
+          }`}
+        >
+          Register
+        </h1>
+        <h1
+          className={` text-darkBlue opacity-90  ${
+            isDark ? "text-slate-300 " : "text-darkBlue"
+          }`}
+        >
+          Join evangadi network
+        </h1>
       </div>
       <form className=" w-full">
         <div className="grid gap-4">
@@ -204,7 +219,13 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
           />
           <div className="text-center my-2 flex justify-center items-center px-2">
             <div className=" w-full h-[2px] bg-gray-300" />
-            <p className=" mx-3 mb-1">or</p>
+            <p
+              className={`mx-3 mb-1  ${
+                isDark ? "text-white" : "text-darkBlue"
+              }`}
+            >
+              or
+            </p>
             <div className=" w-full h-[2px] bg-gray-300" />
           </div>
         </div>

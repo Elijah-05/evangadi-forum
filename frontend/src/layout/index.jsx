@@ -3,9 +3,12 @@ import NavBar from "../components/navbar";
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../components/footer";
 import ScrollUpButton from "../components/button/ScrollUpButton";
+import { useAtom, useAtomValue } from "jotai";
+import { darkTheme } from "../atoms";
 
 const Layout = () => {
   const [showScrollBtn, setShowScrollBtn] = useState(false);
+  const [isDark, setTheme] = useAtom(darkTheme);
   const location = useLocation();
 
   useEffect(() => {
@@ -28,7 +31,11 @@ const Layout = () => {
   }, []);
 
   return (
-    <main className=" min-h-screen  flex flex-col ">
+    <main
+      className={` min-h-screen flex flex-col ${
+        isDark ? "bg-darkBlue" : "bg-slate-50"
+      } duration-500`}
+    >
       {/* Header Naviagtion Bar */}
       <header className="sticky top-0 z-50">
         <NavBar />

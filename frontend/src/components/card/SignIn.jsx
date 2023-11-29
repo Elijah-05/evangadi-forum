@@ -4,13 +4,14 @@ import Button from "../button";
 import TextInput from "../input";
 import { userInstance } from "../../axios/instance";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { registered, userData } from "../../atoms";
+import { darkTheme, registered, userData } from "../../atoms";
 import { useToasts } from "react-toast-notifications";
 
 const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
   const [savedRegistered, setSavedRegistered] = useAtom(registered);
   const [loginError, setLoginError] = useState("");
   const [userInfo, setUserData] = useAtom(userData);
+  const isDark = useAtomValue(darkTheme);
   const [userCredentials, setUserCredentials] = useState({
     email: savedRegistered?.email || "",
     password: savedRegistered?.password || "",
@@ -65,11 +66,25 @@ const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
           : onAnimation
           ? " -translate-y-[550px] absolute opacity-50   duration-700"
           : "translate-y-96 absolute opacity-0 -z-10 duration-[1200ms]"
-      } w-full sm:w-[480px] min-h-[500px] max-w-full flex flex-col items-center justify-center bg-white rounded-lg px-7 pt-7 pb-10 shadow-xl `}
+      } w-full sm:w-[480px] min-h-[500px] max-w-full flex flex-col items-center justify-center rounded-lg px-7 pt-7 pb-10 shadow-xl  ${
+        isDark ? "bg-slate-600" : "bg-white"
+      }`}
     >
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold uppercase text-darkBlue">Sign In</h1>
-        <h1 className=" text-darkBlue opacity-90">Login to your account</h1>
+        <h1
+          className={`text-2xl font-bold uppercase text-darkBlue  ${
+            isDark ? "text-white" : "text-darkBlue"
+          }`}
+        >
+          Sign In
+        </h1>
+        <h1
+          className={` text-darkBlue opacity-90  ${
+            isDark ? "text-slate-300 " : "text-darkBlue"
+          }`}
+        >
+          Login to your account
+        </h1>
       </div>
 
       <form className=" w-full">
@@ -104,7 +119,13 @@ const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
           />
           <div className="  text-center my-2 flex justify-center items-center px-2">
             <div className=" w-full h-[2px] bg-gray-300" />
-            <p className=" mx-3 mb-1">or</p>
+            <p
+              className={`mx-3 mb-1  ${
+                isDark ? "text-white" : "text-darkBlue"
+              }`}
+            >
+              or
+            </p>
             <div className=" w-full h-[2px] bg-gray-300" />
           </div>
         </div>

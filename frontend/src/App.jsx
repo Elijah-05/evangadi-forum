@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useAtom } from "jotai";
-import { userData } from "./atoms/index.jsx";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { darkTheme, userData } from "./atoms/index.jsx";
 import Layout from "./layout/index.jsx";
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -13,13 +13,20 @@ import PageNotFound from "./pages/page_not_found/index.jsx";
 
 const App = () => {
   const [userInfo, setUserInfo] = useAtom(userData);
+  const [isDark, setTheme] = useAtom(darkTheme);
 
   useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    const localThemeValue = theme == "true";
+    if (theme != null) {
+      setTheme(localThemeValue);
+    }
+
     Aos.init({ duration: 1000, once: true });
   }, []);
 
   useEffect(() => {
-    !userInfo?.user?.display_name && checkLoggedIn();
+    userInfo == null && checkLoggedIn();
   }, []);
 
   const checkLoggedIn = async () => {

@@ -1,17 +1,25 @@
-import React, { useState } from "react";
-import { evangadi_logo } from "../../assets";
+import React, { useEffect, useState } from "react";
+import { evangadi_logo, evangadi_logo_white } from "../../assets";
 import Button from "../button";
 import { IoMenu } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import { logAnimation, logState, userData } from "../../atoms";
+import { darkTheme, logAnimation, logState, userData } from "../../atoms";
+import { IoMdSunny } from "react-icons/io";
+import { BsFillMoonStarsFill } from "react-icons/bs";
 
 const NavBar = () => {
   const [signState, setSignState] = useAtom(logState);
+  const [isDark, setIsDark] = useAtom(darkTheme);
   const [onAnimation, setOnAnimation] = useAtom(logAnimation);
   const [menuClassName, setMenuClassName] = useState("");
   const [userInfo, setUserInfo] = useAtom(userData);
   const navigate = useNavigate();
+
+  function handleChangeTheme() {
+    localStorage.setItem("theme", !isDark);
+    setIsDark(!isDark);
+  }
 
   function toggleMenuClassName() {
     menuClassName ? setMenuClassName("") : setMenuClassName("toggle-menu");
@@ -42,13 +50,17 @@ const NavBar = () => {
   }
 
   return (
-    <nav className=" h-20 backdrop-blur-sm bg-white bg-opacity-70 shadow-sm px-2">
+    <nav
+      className={` h-20 backdrop-blur-sm ${
+        isDark ? "bg-slate-800 text-white" : "bg-white"
+      } bg-opacity-80 px-2 shadow-[4px_5px_12px_0px_rgba(0,0,0,0.12)] duration-700`}
+    >
       <div className="max-w-6xl w-full mx-auto h-full flex items-center justify-between">
         <div className="p-2 w-40 hover:scale-[1.03] opacity-75 hover:opacity-100 cursor-pointer duration-300">
           <Link to={"/"}>
             <img
               className=" w-full object-contain"
-              src={evangadi_logo}
+              src={isDark ? evangadi_logo_white : evangadi_logo}
               alt=""
             />
           </Link>
@@ -63,10 +75,10 @@ const NavBar = () => {
               menuClassName == "toggle-menu"
                 ? "menu-open translate-x-0"
                 : " flex  text-darkBlue translate-x-56 sm:translate-x-0"
-            } duration-500`}
+            } ${isDark ? " text-white" : ""} duration-500`}
           >
             <li
-              className=" font-medium hover:text-secondary duration-300"
+              className=" font-medium hover:text-secondary cursor-pointer duration-300"
               onClick={handleMenuClicks}
             >
               Home
@@ -74,12 +86,24 @@ const NavBar = () => {
             <li
               className={` ${
                 menuClassName == "toggle-menu" && "my-2"
-              } font-medium hover:text-secondary duration-300`}
+              } font-medium hover:text-secondary cursor-pointer duration-300`}
               onClick={handleMenuClicks}
             >
               How it Works
             </li>
-            <a href="">
+            <div
+              className=" bg-slate-800 flex items-center px-1 justify-between w-[58px] h-8 border-2 border-darkBlue rounded-full "
+              onClick={handleChangeTheme}
+            >
+              <IoMdSunny className=" text-slate-300 ml-[2px]" />
+              <BsFillMoonStarsFill className=" text-sm text-slate-300 mr-[2px]" />
+              <div
+                className={` absolute w-6 h-6 rounded-full ${
+                  !isDark ? "translate-x-0" : "translate-x-6"
+                } bg-slate-200 duration-300`}
+              />
+            </div>
+            <a href="" className=" my-3">
               <Button
                 label={
                   userInfo

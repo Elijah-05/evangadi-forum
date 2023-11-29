@@ -5,14 +5,15 @@ import {
   questionInstance,
   userInstance,
 } from "../../axios/instance";
-import { useAtom } from "jotai";
-import { questions, userData } from "../../atoms";
+import { useAtom, useAtomValue } from "jotai";
+import { darkTheme, questions, userData } from "../../atoms";
 import Button from "../../components/button";
 import { Link, useNavigate } from "react-router-dom";
 import QuestionCard from "../../components/card/QuestionCard";
 
 const HomePage = () => {
   const [userInfo, setUserInfo] = useAtom(userData);
+  const isDark = useAtomValue(darkTheme);
   const [getQuestions, setQuestions] = useAtom(questions);
   const [answers, setAnswers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -86,7 +87,6 @@ const HomePage = () => {
         },
       })
       .then((response) => {
-        console.log("Response for fetching all answers: ", response);
         setAnswers(response.data);
       })
       .catch((err) => {
@@ -105,17 +105,18 @@ const HomePage = () => {
       ) : (
         <div className="max-w-6xl mx-auto">
           <div
-            className={`z-10 py-4 xs:py-4 mx-1 lg:mx-0 gap-2 px-4 rounded-md sticky top-[88px] left-0 right-0 flex flex-col xs:flex-row justify-between xs:items-center bg-slate-100 shadow-[6px_8px_12px_0px_rgba(0,0,0,0.14)] ${
+            className={`z-40 py-4 xs:py-4 mx-1 lg:mx-0 gap-2 px-4 rounded-md sticky top-[88px] left-0 right-0 flex flex-col xs:flex-row justify-between xs:items-center shadow-[6px_4px_12px_0px_rgba(0,0,0,0.14)] ${
               showNav
                 ? ""
                 : `-translate-y-[85px] ${!onAnimation && "opacity-0 "}`
-            } duration-700`}
+            } ${isDark ? "bg-slate-600" : "bg-slate-100"} duration-700`}
           >
-            <h1 className=" text-xl sm:text-2xl text-center md:text-left text-darkBlue font-medium">
-              Welcome:{" "}
-              <span className=" text-darkBlue">
-                {userInfo?.user?.display_name}
-              </span>
+            <h1
+              className={`text-xl sm:text-2xl text-center md:text-left text-darkBlue font-medium ${
+                isDark ? "text-slate-100" : "text-darkBlue"
+              }`}
+            >
+              Welcome: <span className=" ">{userInfo?.user?.display_name}</span>
             </h1>
             <Link to={"/ask"} className="">
               <Button label={"Ask Question"} primary />
@@ -123,7 +124,11 @@ const HomePage = () => {
           </div>
 
           <div className=" mt-10 px-2 md:px-2 md:mx-4 xl:mx-0 ">
-            <h1 className="ml-1 text-xl xs:text-xl text-center md:text-left font-medium">
+            <h1
+              className={`ml-1 text-xl xs:text-xl mb-3 text-center md:text-left font-medium ${
+                isDark ? "text-slate-300" : "text-darkBlue"
+              }`}
+            >
               Questions{" "}
               <span className="text-lg xs:text-lg text-secondary">
                 {getQuestions?.length}

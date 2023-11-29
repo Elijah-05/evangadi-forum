@@ -5,5 +5,6 @@ const questions = atom([]);
 const logState = atom("log_in");
 const logAnimation = atom(false);
 const registered = atom(null);
+const darkTheme = atom(false);
 
-export { userData, questions, logState, logAnimation, registered };
+export { userData, questions, logState, logAnimation, registered, darkTheme };
