@@ -81,7 +81,6 @@ const SignUp = ({ signState, onAnimation, handleLogIn, handleRegister }) => {
     userInstance
       .post("/", newUser)
       .then((data) => {
-        console.log("Response: ", data);
         setNewUser(newUserInitial);
         saveRegistered({
           email: newUser.email,

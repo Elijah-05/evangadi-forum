@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 const CircleAvatar = ({ imagePath, alt, size = 11 }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  console.log({ screenWidth });
   function handleResize() {
     setScreenWidth(window.innerWidth);
   }

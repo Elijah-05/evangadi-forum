@@ -19,7 +19,6 @@ const AskQuestion = () => {
   const navigate = useNavigate();
 
   function handleOnChange(e) {
-    console.log("handleCahgne on elelmdnt: ", e.target);
     setQuestion({ ...question, [e.target.name]: e.target.value });
     setError({ ...error, [e.target.name]: "" });
   }

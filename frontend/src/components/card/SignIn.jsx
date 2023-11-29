@@ -19,8 +19,8 @@ const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
 
   useEffect(() => {
     setUserCredentials({
-      email: savedRegistered?.email,
-      password: savedRegistered?.password,
+      email: savedRegistered?.email || "",
+      password: savedRegistered?.password || "",
     });
   }, [savedRegistered]);
 

@@ -48,7 +48,6 @@ const App = () => {
     {
       path: "/",
       element: <Layout />,
-      errorElement: <PageNotFound />,
       children: [
         {
           path: "/",
@@ -56,11 +55,19 @@ const App = () => {
         },
         {
           path: "/ask",
-          element: <AskQuestion />,
+          element: userInfo?.user?.display_name ? (
+            <AskQuestion />
+          ) : (
+            <PageNotFound />
+          ),
         },
         {
           path: "/answers/:question_id",
           element: <Answer />,
+        },
+        {
+          path: "*",
+          element: <PageNotFound />,
         },
       ],
     },

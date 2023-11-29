@@ -24,9 +24,12 @@ const Footer = () => {
         <FooterList head={"Contact Info"} lists={footer_data.contact} />
       </div>
       <div className="max-w-6xl mx-auto h-[2px] bg-secondaryHover  my-6" />
-      <div className=" flex items-center justify-center ">
-        <p className="text-gray-300 text-center">
-          evangadi forum - developed by{" "}
+      <div className=" flex flex-col items-center justify-center text-gray-300 ">
+        <p className="text-slate-300 text-center font-serif ">
+          Project: Evangadi forum
+        </p>
+        <p className="text-sm text-slate-400">
+          Designed & Developed by{" "}
           <a
             href="https://ellaportfolio.netlify.app/"
             rel="noreferrer"

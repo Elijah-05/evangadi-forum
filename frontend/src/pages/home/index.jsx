@@ -35,9 +35,6 @@ const HomePage = () => {
     setShowNav(isScrollTopTrue);
   }
 
-  console.log({ prevScrollYPos });
-  console.log({ showNav });
-
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     // Remove event listener on component unmount
@@ -72,7 +69,6 @@ const HomePage = () => {
           },
         })
         .then((response) => {
-          console.log("QuestionFetched!...");
           setQuestions(response.data.reverse());
           setIsLoading(false);
         })
@@ -99,7 +95,6 @@ const HomePage = () => {
   };
 
   function handleQuestionDetail(question) {
-    console.log("Question detail Page for question_id: ", question);
     navigate(`/answers/${question.question_id}`, { state: { question } });
   }
 

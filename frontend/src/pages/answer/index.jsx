@@ -26,7 +26,6 @@ const Answer = () => {
 
   const fetchAnswer = async () => {
     let token = localStorage.getItem("auth-token");
-    console.log({ token });
     answerInstance
       .get("/", {
         headers: {
@@ -36,7 +35,6 @@ const Answer = () => {
       })
       .then((response) => {
         setFetchedAnswer(response.data);
-        console.log("Fetch answer response: ", response);
       })
       .catch((err) => {
         console.log("fetching answer error: ", err);
@@ -57,7 +55,6 @@ const Answer = () => {
           questionId: question_id,
         })
         .then((response) => {
-          console.log("Answer Response: ", response);
           setAnswerInput("");
           setAnswerPosted(true);
         })

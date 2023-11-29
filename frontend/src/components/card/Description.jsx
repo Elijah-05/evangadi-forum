@@ -2,8 +2,25 @@ import { useEffect, useState } from "react";
 import Button from "../button";
 
 const Description = () => {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  function handleResize() {
+    setScreenWidth(window.innerWidth);
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <div data-aos="fade-left" className=" w-full max-w-sm p-4 sm:p-0">
+    <div
+      data-aos={screenWidth > 1080 ? "fade-left" : "fade-up"}
+      className=" w-full max-w-sm p-4 sm:p-0"
+    >
       <p className=" text-secondary">About</p>
       <h1 className=" text-3xl  font-bold my-2 text-darkBlue">
         Evangadi Networks Q&A

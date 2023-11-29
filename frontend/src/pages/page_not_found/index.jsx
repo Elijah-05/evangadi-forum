@@ -4,7 +4,7 @@ import { page_not_found } from "../../assets";
 
 const PageNotFound = () => {
   return (
-    <div className=" h-screen flex items-center justify-center mb-20 sm:mb-0">
+    <div className=" mt-16 sm:mt-0 sm:h-screen flex items-center justify-center mb-20 sm:mb-0">
       <div className=" flex flex-col sm:flex-row items-center justify-center">
         <img className=" w-[200px] sm:w-[300px]" src={page_not_found} alt="" />
         <div className="px-4  max-w-sm">
