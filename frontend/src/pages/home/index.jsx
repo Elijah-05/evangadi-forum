@@ -17,6 +17,34 @@ const HomePage = () => {
   const [answers, setAnswers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const token = localStorage.getItem("auth-token");
+  const [prevScrollYPos, setPrevScrollYPos] = useState(window.scrollY);
+  const [showNav, setShowNav] = useState(true);
+  const [onAnimation, setOnAnimation] = useState(false);
+
+  function handleScroll() {
+    let currentScrollY = window.scrollY;
+    setOnAnimation(true);
+
+    const isScrollTopTrue = currentScrollY < prevScrollYPos + showNav && 20;
+
+    setPrevScrollYPos(currentScrollY);
+    setTimeout(() => {
+      setOnAnimation(false);
+    }, 700);
+
+    setShowNav(isScrollTopTrue);
+  }
+
+  console.log({ prevScrollYPos });
+  console.log({ showNav });
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollYPos]);
 
   const navigate = useNavigate();
 
@@ -81,7 +109,13 @@ const HomePage = () => {
         <LandingPage />
       ) : (
         <div className="max-w-6xl mx-auto">
-          <div className="z-10 py-4 xs:py-4  gap-2 px-4 rounded-md sticky top-[88px] left-0 right-0 flex flex-col xs:flex-row justify-between xs:items-center bg-slate-200 shadow-[6px_8px_12px_0px_rgba(0,0,0,0.14)]">
+          <div
+            className={`z-10 py-4 xs:py-4 mx-1 lg:mx-0 gap-2 px-4 rounded-md sticky top-[88px] left-0 right-0 flex flex-col xs:flex-row justify-between xs:items-center bg-slate-100 shadow-[6px_8px_12px_0px_rgba(0,0,0,0.14)] ${
+              showNav
+                ? ""
+                : `-translate-y-[85px] ${!onAnimation && "opacity-0 "}`
+            } duration-700`}
+          >
             <h1 className=" text-xl sm:text-2xl text-center md:text-left text-darkBlue font-medium">
               Welcome:{" "}
               <span className=" text-darkBlue">

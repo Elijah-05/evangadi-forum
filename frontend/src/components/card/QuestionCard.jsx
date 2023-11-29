@@ -19,6 +19,8 @@ const QuestionCard = ({ questionData, noOfAnswers, onClick, forAnswer }) => {
       className={`group flex flex-col md:flex-row items-start gap-2 md:gap-4 ${
         !forAnswer &&
         "bg-slate-100 hover:bg-slate-200 scale-[0.995] hover:scale-[1.005] hover:shadow-[6px_5px_12px_0px_rgba(0,0,0,0.15)]"
+      } ${
+        forAnswer && "shadow-[0px_5px_10px_0px_rgba(0,0,0,0.05)]"
       } p-2 sm:p-3 rounded-md cursor-pointer duration-500`}
       key={question_id}
       onClick={() => onClick && onClick(questionData)}

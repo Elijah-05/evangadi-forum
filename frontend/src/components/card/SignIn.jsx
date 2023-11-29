@@ -55,7 +55,6 @@ const SignIn = ({ signState, onAnimation, handleLogin, handleRegister }) => {
           autoDismiss: true,
         });
       });
-    console.log("sucessfully loged in!");
   }
 
   return (

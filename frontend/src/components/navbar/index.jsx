@@ -31,9 +31,9 @@ const NavBar = () => {
   }
 
   return (
-    <nav className=" h-20 backdrop-blur-sm bg-white bg-opacity-50 shadow-sm px-2">
-      <div className=" max-w-6xl h-20 mx-auto py-3 flex items-center justify-between">
-        <div className=" p-2 w-40 hover:scale-[1.03] opacity-75 hover:opacity-100 cursor-pointer duration-300">
+    <nav className=" h-20 backdrop-blur-sm bg-white bg-opacity-70 shadow-sm px-2">
+      <div className="max-w-6xl mx-auto h-full flex items-center justify-between">
+        <div className="p-2 w-40 hover:scale-[1.03] opacity-75 hover:opacity-100 cursor-pointer duration-300">
           <Link to={"/"}>
             <img
               className=" w-full object-contain"

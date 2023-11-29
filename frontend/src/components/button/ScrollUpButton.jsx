@@ -14,9 +14,9 @@ const ScrollUpButton = ({ showScrollBtn }) => {
         })
       }
     >
-      <div className="w-11 h-11 absolute animate-pulse scale-150 opacity-20 group-hover:opacity-50 duration-500 rounded-full flex justify-center items-center  bg-yellow-400" />
-      <div className="w-11 h-11 absolute group-hover:scale-[1.8] opacity-0 group-hover:opacity-50 duration-500 rounded-full flex justify-center items-center  bg-yellow-200" />
-      <div className=" scale-100 border-2  bg-slate-800 group- hover:bg- yellow-400 duration-300 w-11 h-11 rounded-full flex items-center justify-center">
+      <div className=" w-10 sm:w-11  h-10 sm:h-11 absolute animate-pulse scale-150 opacity-10 group-hover:opacity-50 duration-500 rounded-full flex justify-center items-center bg-secondaryHover" />
+      <div className=" w-10 sm:w-11  h-10 sm:h-11 absolute group-hover:scale-[1.8] opacity-0 group-hover:opacity-20 duration-500 rounded-full flex justify-center items-center bg-secondaryHover" />
+      <div className="w-10 sm:w-11  h-10 sm:h-11 scale-100 border-2  bg-darkBlue group- hover:bg- yellow-400 duration-300  rounded-full flex items-center justify-center">
         <div className=" group-hover:-translate-y-1 duration-500 ">
           <FaChevronUp className="text-white group-hover:scale-125" />
         </div>
